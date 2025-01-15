@@ -196,10 +196,6 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="EngineConst.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
     <ClInclude Include="EngineConstantBuffer.h">
       <SubType>
       </SubType>
@@ -208,17 +204,12 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="EngineDataStruct.h" />
     <ClInclude Include="EngineDepthStencilState.h" />
     <ClInclude Include="EngineDeviceBuffer.h">
       <SubType>
       </SubType>
     </ClInclude>
     <ClInclude Include="EngineEnums.h" />
-    <ClInclude Include="EngineFont.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
     <ClInclude Include="EngineGraphicDevice.h">
       <SubType>
       </SubType>
@@ -247,10 +238,6 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="HUD.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
     <ClInclude Include="imconfig.h" />
     <ClInclude Include="imgui.h" />
     <ClInclude Include="imgui_impl_dx11.h" />
@@ -274,10 +261,6 @@
     </ClInclude>
     <ClInclude Include="PreCompile.h" />
     <ClInclude Include="Renderer.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="EngineRenderTarget.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -326,17 +309,8 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="ThirdParty\FW1FontWrapper\Inc\FW1FontWrapper.h" />
     <ClInclude Include="TileMapRenderer.h" />
     <ClInclude Include="TimeEventComponent.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="TransformObject.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="Widget.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -380,10 +354,6 @@
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="EngineFont.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
     <ClCompile Include="EngineGraphicDevice.cpp">
       <SubType>
       </SubType>
@@ -409,10 +379,6 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="GameMode.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="HUD.cpp">
       <SubType>
       </SubType>
     </ClCompile>
@@ -442,10 +408,6 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">PreCompile.h</PrecompiledHeaderFile>
     </ClCompile>
     <ClCompile Include="Renderer.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="EngineRenderTarget.cpp">
       <SubType>
       </SubType>
     </ClCompile>
@@ -496,14 +458,6 @@
     <ClCompile Include="EngineVertex.cpp" />
     <ClCompile Include="TileMapRenderer.cpp" />
     <ClCompile Include="TimeEventComponent.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="TransformObject.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="Widget.cpp">
       <SubType>
       </SubType>
     </ClCompile>

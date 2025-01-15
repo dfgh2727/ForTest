@@ -20,8 +20,6 @@ public:
 	URenderUnit();
 	~URenderUnit();
 
-	UTransformObject* TransformObject = nullptr;
-
 	URenderer* ParentRenderer = nullptr;
 
 	// 매쉬(육체) 
@@ -50,15 +48,14 @@ public:
 	ENGINEAPI void ConstantBufferLinkData(std::string_view Name, void* _Data);
 
 	ENGINEAPI void SetTexture(std::string_view _Name, std::string_view _ResName);
-	ENGINEAPI void SetTexture(std::string_view _Name, std::shared_ptr<UEngineTexture> _Texture);
 	ENGINEAPI void SetSampler(std::string_view Name, std::string_view _ResName);
-
 
 	ENGINEAPI void SetTexture(std::string_view _Name, UEngineTexture* _Texture);
 
+private:
+	// 자신만의 리소스를 가지고 있습니다.
 	std::map<EShaderType, UEngineShaderResources> Resources;
 
-private:
 	void InputLayOutCreate();
 };
 

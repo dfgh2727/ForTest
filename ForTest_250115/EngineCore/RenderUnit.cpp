@@ -31,11 +31,6 @@ void URenderUnit::MaterialResourcesCheck()
 
 	if (nullptr != ParentRenderer)
 	{
-		TransformObject = ParentRenderer;
-	}
-
-	if (nullptr != TransformObject)
-	{
 		for (EShaderType i = EShaderType::VS; i < EShaderType::MAX; i = static_cast<EShaderType>(static_cast<int>(i) + 1))
 		{
 			if (false == Resources.contains(i))
@@ -49,7 +44,7 @@ void URenderUnit::MaterialResourcesCheck()
 			}
 
 
-			FTransform& Ref = TransformObject->GetTransformRef();
+			FTransform& Ref = ParentRenderer->GetTransformRef();
 			Resources[i].ConstantBufferLinkData("FTransform", Ref);
 		}
 		
@@ -107,24 +102,6 @@ void URenderUnit::SetTexture(std::string_view _Name, std::string_view _ResName)
 		}
 
 		Resources[i].TextureSetting(_Name, _ResName);
-	}
-}
-
-void URenderUnit::SetTexture(std::string_view _Name, std::shared_ptr<UEngineTexture> _Texture)
-{
-	for (EShaderType i = EShaderType::VS; i < EShaderType::MAX; i = static_cast<EShaderType>(static_cast<int>(i) + 1))
-	{
-		if (false == Resources.contains(i))
-		{
-			continue;
-		}
-
-		if (false == Resources[i].IsTexture(_Name))
-		{
-			continue;
-		}
-
-		Resources[i].TextureSetting(_Name, _Texture);
 	}
 }
 

@@ -9,7 +9,6 @@
 #include <EngineCore/EngineBlend.h>
 #include <EngineCore/EngineShader.h>
 #include <EngineCore/EngineMaterial.h>
-#include <EngineCore/HUD.h>
 
 #include "TestLevel.h"
 
@@ -29,7 +28,8 @@ void ContentsForTest::EngineStart(UEngineInitData& _Data)
 	_Data.WindowPos = { 540, 200 };
 	_Data.WindowSize = { 760, 570 };
 
-	UEngineCore::CreateLevel<TestLevel, APawn, AHUD>("Title");
+	UEngineCore::CreateLevel<TestLevel, APawn>("Test");
+	UEngineCore::OpenLevel("Test");
 
 	/*{
 		UEngineDirectory CurDir;

@@ -10,32 +10,62 @@ USceneComponent::~USceneComponent()
 }
 
 
+void USceneComponent::SetupAttachment(std::shared_ptr<USceneComponent> _Parent)
+{
+	SetupAttachment(_Parent.get());
+}
+
+void USceneComponent::ParentMatrixCheck()
+{
+	if (nullptr != Parent)
+	{
+		Transform.ParentMat = Parent->Transform.World;
+	}
+}
+
+void USceneComponent::SetupAttachment(USceneComponent* _Parent)
+{
+	Parent = _Parent;
+	Parent->Childs.push_back(GetThis<USceneComponent>());
+
+	TransformUpdate();
+}
+
 void USceneComponent::BeginPlay()
 {
 	UActorComponent::BeginPlay();
 
-	for (UTransformObject* Child : Childs)
+	for (std::shared_ptr<USceneComponent> Child : Childs)
 	{
-		USceneComponent* SceneChild = dynamic_cast<USceneComponent*>(Child);
-
-		SceneChild->BeginPlay();
+		Child->BeginPlay();
 	}
 }
 
-void USceneComponent::ComponentTick(float _DeltaTime)
+void USceneComponent::TransformUpdate()
+{
+	ParentMatrixCheck();
+	// 나의 트랜스폼 업데이트는 일단 한다.
+	Transform.TransformUpdate(IsAbsolute);
+
+	for (std::shared_ptr<USceneComponent> Child : Childs)
+	{
+		Child->TransformUpdate();
+	}
+
+	IsAbsolute = false;
+}
+
+void USceneComponent::ComponentTick(float _DeltaTime) 
 {
 	UActorComponent::ComponentTick(_DeltaTime);
 
-	for (UTransformObject* Child : Childs)
+	for (std::shared_ptr<USceneComponent> Child : Childs)
 	{
-
-		USceneComponent* SceneChild = dynamic_cast<USceneComponent*>(Child);
-
-		if (false == SceneChild->IsActive())
+		if (false == Child->IsActive())
 		{
 			continue;
 		}
 
-		SceneChild->ComponentTick(_DeltaTime);
+		Child->ComponentTick(_DeltaTime);
 	}
 }

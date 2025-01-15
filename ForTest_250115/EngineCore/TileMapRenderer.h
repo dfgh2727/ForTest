@@ -30,7 +30,7 @@ struct FTileData
 	bool IsBlock = false;
 	int SpriteIndex = 0;
 	FTileIndex Index;
-	FResultColor ColorData;
+	ResultColor ColorData;
 	FSpriteData SpriteData;
 };
 
@@ -109,6 +109,7 @@ protected:
 	ENGINEAPI void Render(class UEngineCamera* _Camera, float _DeltaTime) override;
 	void BeginPlay() override;
 	void ComponentTick(float _DeltaTime) override;
+	ENGINEAPI void RenderTransUpdate(UEngineCamera* _Camera) override;
 
 private:
 	bool IsAutoScale = true;

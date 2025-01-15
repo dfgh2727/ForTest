@@ -96,7 +96,7 @@ void USpriteRenderer::Render(UEngineCamera* _Camera, float _DeltaTime)
 	}
 }
 
-void USpriteRenderer::CameraTransUpdate(UEngineCamera* _Camera)
+void USpriteRenderer::RenderTransUpdate(UEngineCamera* _Camera) 
 {
 	FTransform& CameraTrans = _Camera->GetTransformRef();
 	FTransform& RendererTrans = GetTransformRef();
