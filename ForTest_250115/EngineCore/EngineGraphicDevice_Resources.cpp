@@ -97,7 +97,7 @@ void UEngineGraphicDevice::TextureInit()
 
 	{
 		UEngineDirectory Dir;
-		if (false == Dir.MoveParentToDirectory("EngineShader"))
+		if (false == Dir.MoveParentToDirectory("ShaderForTest"))
 		{
 			MSGASSERT("EngineShader 폴더를 찾지 못했습니다.");
 			return;
@@ -114,7 +114,7 @@ void UEngineGraphicDevice::TextureInit()
 void UEngineGraphicDevice::ShaderInit()
 {
 	UEngineDirectory CurDir;
-	CurDir.MoveParentToDirectory("EngineShader");
+	CurDir.MoveParentToDirectory("ShaderForTest");
 
 	std::vector<UEngineFile> ShaderFiles = CurDir.GetAllFile(true, {".fx", ".hlsl"});
 
@@ -240,40 +240,40 @@ void UEngineGraphicDevice::RasterizerStateInit()
 void UEngineGraphicDevice::MaterialInit()
 {
 	{
-		std::shared_ptr<UEngineMaterial> Mat = UEngineMaterial::Create("SpriteMaterial");
-		Mat->SetVertexShader("EngineSpriteShader.fx");
-		Mat->SetPixelShader("EngineSpriteShader.fx");
+		std::shared_ptr<UEngineMaterial> Mat = UEngineMaterial::Create("MyMaterial");
+		Mat->SetVertexShader("ShaderForTest.fx");
+		Mat->SetPixelShader("ShaderForTest.fx");
 	}
 
-	{
-		std::shared_ptr<UEngineMaterial> Mat = UEngineMaterial::Create("WidgetMaterial");
-		Mat->SetVertexShader("EngineSpriteShader.fx");
-		Mat->SetPixelShader("EngineSpriteShader.fx");
-		Mat->SetDepthStencilState("UIDepth");
-	}
+	//{
+	//	std::shared_ptr<UEngineMaterial> Mat = UEngineMaterial::Create("WidgetMaterial");
+	//	Mat->SetVertexShader("EngineSpriteShader.fx");
+	//	Mat->SetPixelShader("EngineSpriteShader.fx");
+	//	Mat->SetDepthStencilState("UIDepth");
+	//}
 
 
-	{
-		std::shared_ptr<UEngineMaterial> Mat = UEngineMaterial::Create("CollisionDebugMaterial");
-		Mat->SetVertexShader("EngineDebugCollisionShader.fx");
-		Mat->SetPixelShader("EngineDebugCollisionShader.fx");
-		// 언제나 화면에 나오는 누구도 이녀석의 앞을 가릴수 없어.
-		Mat->SetDepthStencilState("CollisionDebugDepth");
-		Mat->SetRasterizerState("CollisionDebugRas");
-	}
+	//{
+	//	std::shared_ptr<UEngineMaterial> Mat = UEngineMaterial::Create("CollisionDebugMaterial");
+	//	Mat->SetVertexShader("EngineDebugCollisionShader.fx");
+	//	Mat->SetPixelShader("EngineDebugCollisionShader.fx");
+	//	// 언제나 화면에 나오는 누구도 이녀석의 앞을 가릴수 없어.
+	//	Mat->SetDepthStencilState("CollisionDebugDepth");
+	//	Mat->SetRasterizerState("CollisionDebugRas");
+	//}
 
-	{
-		std::shared_ptr<UEngineMaterial> Mat = UEngineMaterial::Create("TileMap");
-		Mat->SetVertexShader("EngineTileMapShader.fx");
-		Mat->SetPixelShader("EngineTileMapShader.fx");
-	}
+	//{
+	//	std::shared_ptr<UEngineMaterial> Mat = UEngineMaterial::Create("TileMap");
+	//	Mat->SetVertexShader("EngineTileMapShader.fx");
+	//	Mat->SetPixelShader("EngineTileMapShader.fx");
+	//}
 
-	{
+	/*{
 		std::shared_ptr<UEngineMaterial> Mat = UEngineMaterial::Create("TargetMerge");
 		Mat->SetVertexShader("EngineTargetMergeShader.fx");
 		Mat->SetPixelShader("EngineTargetMergeShader.fx");
 		Mat->SetDepthStencilState("TargetMerge");
-	}
+	}*/
 
 
 
