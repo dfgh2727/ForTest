@@ -16,7 +16,7 @@ TestActor::TestActor()
 	RootComponent = Default;
 
 	Renderer = CreateDefaultSubObject<MyCustomRenderer>();
-	Renderer->SetScale3D({ 200.0f, 200.0f, 200.0f });
+	Renderer->SetScale3D({ 100.0f, 100.0f, 100.0f });
 	Renderer->SetupAttachment(RootComponent);
 
 }

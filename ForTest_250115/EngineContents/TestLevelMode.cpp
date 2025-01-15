@@ -34,8 +34,7 @@ void TestLevelMode::Tick(float _DeltaTime)
 	if (UEngineInput::IsDown('P'))
 	{
 		GetWorld()->GetMainCamera()->FreeCameraSwitch();
-
 	}
 
-	Object->AddActorRotation({ 0.0f, 0.0f ,-100.0f * _DeltaTime });
+	Object->AddActorRotation({ 0.0f, 0.0f ,500.0f * _DeltaTime });
 }
