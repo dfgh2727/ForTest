@@ -6,5 +6,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PreCompile.h" />
+    <ClInclude Include="ContentsForTest.h" />
   </ItemGroup>
 </Project>
