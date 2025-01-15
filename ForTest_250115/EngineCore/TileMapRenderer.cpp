@@ -45,15 +45,6 @@ FTileIndex UTileMapRenderer::WorldPosToTileIndex(FVector _Pos)
 	case Rect:
 	{
 		FVector ConvertVector = _Pos /= TileSize;
-		if (_Pos.X < 0.0f)
-		{
-			ConvertVector.X = floorf(ConvertVector.X);
-		}
-		if (_Pos.Y < 0.0f)
-		{
-			ConvertVector.Y = floorf(ConvertVector.Y);
-		}
-
 		Result.X = ConvertVector.iX();
 		Result.Y = ConvertVector.iY();
 		break;
@@ -77,8 +68,8 @@ FVector UTileMapRenderer::TileIndexToWorldPos(FTileIndex _Index)
 	switch (TileMapType)
 	{
 	case Rect:
-		Result.X = _Index.X * TileSize.X - 0.5f * TileSize.X;
-		Result.Y = _Index.Y * TileSize.X - 0.5f * TileSize.X;
+		Result.X = _Index.X * TileSize.X;
+		Result.Y = _Index.Y * TileSize.X;
 		break;
 	case Iso:
 	{
@@ -108,7 +99,7 @@ void UTileMapRenderer::Render(UEngineCamera* _Camera, float _DeltaTime)
 	{
 		return;
 	}
-
+	
 	URenderUnit& Unit = GetRenderUnit();
 
 	FTransform Trans;
@@ -173,11 +164,11 @@ void UTileMapRenderer::SetTile(int _X, int _Y, int _Spriteindex)
 
 	NewTile.Index = Index;
 	NewTile.SpriteIndex = _Spriteindex;
-	NewTile.SpriteData.CuttingPos = { 0.0f, 0.0f };
+	NewTile.SpriteData.CuttingPos = {0.0f, 0.0f};
 	NewTile.SpriteData.CuttingSize = { 1.0f, 1.0f };
 	NewTile.SpriteData.Pivot = { 0.5f, 0.5f };
 	NewTile.ColorData.PlusColor = { 0.0f, 0.0f, 0.0f, 0.0f };
-	NewTile.ColorData.MulColor = { 1.0f, 1.0f, 1.0f, 1.0f };
+	NewTile.ColorData.MulColor = { 1.0f, 1.0f, 1.0f, 1.0f };	
 }
 
 void UTileMapRenderer::RemoveTile(int _X, int _Y)
@@ -192,9 +183,6 @@ void UTileMapRenderer::RemoveTile(int _X, int _Y)
 	Tiles.erase(Index.Key);
 }
 
-void UTileMapRenderer::RenderTransUpdate(UEngineCamera* _Camera)
-{
-}
 
 void UTileMapRenderer::ComponentTick(float _DeltaTime)
 {

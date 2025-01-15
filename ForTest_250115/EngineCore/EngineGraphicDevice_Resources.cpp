@@ -8,6 +8,7 @@
 #include "EngineShader.h"
 #include "EngineMaterial.h"
 #include "EngineTexture.h"
+#include "EngineFont.h"
 #include "EngineDepthStencilState.h"
 
 void UEngineGraphicDevice::DefaultResourcesInit()
@@ -19,6 +20,9 @@ void UEngineGraphicDevice::DefaultResourcesInit()
 	RasterizerStateInit();
 	ShaderInit();
 	MaterialInit();
+
+	// 직접 자기 폰트 
+	UEngineFont::Load("궁서", "궁서");
 }
 
 void UEngineGraphicDevice::DepthStencilInit()
@@ -37,6 +41,19 @@ void UEngineGraphicDevice::DepthStencilInit()
 
 	{
 		D3D11_DEPTH_STENCIL_DESC Desc = { 0 };
+		Desc.DepthEnable = false;
+		Desc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ALL;
+		// 깊이값이 더 작으면 통과시켜
+		Desc.DepthFunc = D3D11_COMPARISON_LESS;
+		Desc.StencilEnable = false;
+		// Desc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ZERO;
+
+		UEngineDepthStencilState::Create("UIDepth", Desc);
+	}
+
+
+	{
+		D3D11_DEPTH_STENCIL_DESC Desc = { 0 };
 		Desc.DepthEnable = true;
 		Desc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ALL;
 		// 깊이값이 더 작으면 통과시켜
@@ -46,6 +63,19 @@ void UEngineGraphicDevice::DepthStencilInit()
 
 		UEngineDepthStencilState::Create("CollisionDebugDepth", Desc);
 	}
+
+	{
+		D3D11_DEPTH_STENCIL_DESC Desc = { 0 };
+		Desc.DepthEnable = true;
+		Desc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ALL;
+		// 깊이값이 더 작으면 통과시켜
+		Desc.DepthFunc = D3D11_COMPARISON_ALWAYS;
+		Desc.StencilEnable = false;
+		// Desc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ZERO;
+
+		UEngineDepthStencilState::Create("TargetMerge", Desc);
+	}
+
 }
 
 void UEngineGraphicDevice::TextureInit()
@@ -69,7 +99,7 @@ void UEngineGraphicDevice::TextureInit()
 		UEngineSampler::Create("WRAPSampler", SampInfo);
 
 
-	/*{
+	{
 		UEngineDirectory Dir;
 		if (false == Dir.MoveParentToDirectory("EngineShader"))
 		{
@@ -82,13 +112,13 @@ void UEngineGraphicDevice::TextureInit()
 			std::string FilePath = ImageFiles[i].GetPathToString();
 			UEngineTexture::Load(FilePath);
 		}
-	}*/
+	}
 }
 
 void UEngineGraphicDevice::ShaderInit()
 {
 	UEngineDirectory CurDir;
-	CurDir.MoveParentToDirectory("ShaderForTest");
+	CurDir.MoveParentToDirectory("EngineShader");
 
 	std::vector<UEngineFile> ShaderFiles = CurDir.GetAllFile(true, {".fx", ".hlsl"});
 
@@ -129,7 +159,20 @@ void UEngineGraphicDevice::MeshInit()
 	}
 
 	{
+		std::vector<FEngineVertex> Vertexs;
+		Vertexs.resize(4);
+		Vertexs[0] = FEngineVertex{ FVector(-1.0f, 1.0f, 0.0f), {0.0f , 0.0f }, {1.0f, 0.0f, 0.0f, 1.0f} };
+		Vertexs[1] = FEngineVertex{ FVector(1.0f, 1.0f, 0.0f), {1.0f , 0.0f } , {0.0f, 1.0f, 0.0f, 1.0f} };
+		Vertexs[2] = FEngineVertex{ FVector(-1.0f, -1.0f, 0.0f), {0.0f , 1.0f } , {0.0f, 0.0f, 1.0f, 1.0f} };
+		Vertexs[3] = FEngineVertex{ FVector(1.0f, -1.0f, 0.0f), {1.0f , 1.0f } , {1.0f, 1.0f, 1.0f, 1.0f} };
+
+		UEngineVertexBuffer::Create("FullRect", Vertexs);
+	}
+
+	{
 		UMesh::Create("Rect");
+		// FullRect 포스트프로세싱용 화면 전체크기 만한 매쉬를 제작.
+		UMesh::Create("FullRect", "FullRect", "Rect");
 	}
 
 }
@@ -171,11 +214,10 @@ void UEngineGraphicDevice::BlendInit()
 	Desc.RenderTarget[0].SrcBlend = D3D11_BLEND_SRC_ALPHA;
 	Desc.RenderTarget[0].DestBlend = D3D11_BLEND_INV_SRC_ALPHA;
 
-	Desc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;
+	// 알파값 저 갑자기 이상해졌어요.
+	Desc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_MAX;
 	Desc.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_ONE;
 	Desc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_ONE;
-
-
 
 	UEngineBlend::Create("AlphaBlend", Desc);
 }
@@ -203,23 +245,40 @@ void UEngineGraphicDevice::MaterialInit()
 {
 	{
 		std::shared_ptr<UEngineMaterial> Mat = UEngineMaterial::Create("SpriteMaterial");
-		Mat->SetVertexShader("ShaderForTest.fx");
-		Mat->SetPixelShader("ShaderForTest.fx");
+		Mat->SetVertexShader("EngineSpriteShader.fx");
+		Mat->SetPixelShader("EngineSpriteShader.fx");
 	}
 
-	//{
-	//	std::shared_ptr<UEngineMaterial> Mat = UEngineMaterial::Create("CollisionDebugMaterial");
-	//	Mat->SetVertexShader("EngineDebugCollisionShader.fx");
-	//	Mat->SetPixelShader("EngineDebugCollisionShader.fx");
-	//	// 언제나 화면에 나오는 누구도 이녀석의 앞을 가릴수 없어.
-	//	Mat->SetDepthStencilState("CollisionDebugDepth");
-	//	Mat->SetRasterizerState("CollisionDebugRas");
-	//}
+	{
+		std::shared_ptr<UEngineMaterial> Mat = UEngineMaterial::Create("WidgetMaterial");
+		Mat->SetVertexShader("EngineSpriteShader.fx");
+		Mat->SetPixelShader("EngineSpriteShader.fx");
+		Mat->SetDepthStencilState("UIDepth");
+	}
 
-	//{
-	//	std::shared_ptr<UEngineMaterial> Mat = UEngineMaterial::Create("TileMap");
-	//	Mat->SetVertexShader("EngineTileMapShader.fx");
-	//	Mat->SetPixelShader("EngineTileMapShader.fx");
-	//}
+
+	{
+		std::shared_ptr<UEngineMaterial> Mat = UEngineMaterial::Create("CollisionDebugMaterial");
+		Mat->SetVertexShader("EngineDebugCollisionShader.fx");
+		Mat->SetPixelShader("EngineDebugCollisionShader.fx");
+		// 언제나 화면에 나오는 누구도 이녀석의 앞을 가릴수 없어.
+		Mat->SetDepthStencilState("CollisionDebugDepth");
+		Mat->SetRasterizerState("CollisionDebugRas");
+	}
+
+	{
+		std::shared_ptr<UEngineMaterial> Mat = UEngineMaterial::Create("TileMap");
+		Mat->SetVertexShader("EngineTileMapShader.fx");
+		Mat->SetPixelShader("EngineTileMapShader.fx");
+	}
+
+	{
+		std::shared_ptr<UEngineMaterial> Mat = UEngineMaterial::Create("TargetMerge");
+		Mat->SetVertexShader("EngineTargetMergeShader.fx");
+		Mat->SetPixelShader("EngineTargetMergeShader.fx");
+		Mat->SetDepthStencilState("TargetMerge");
+	}
+
+
 
 }
