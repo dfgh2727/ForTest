@@ -32,10 +32,10 @@
     <ClInclude Include="TitleHUD.h">
       <Filter>HUD</Filter>
     </ClInclude>
-    <ClInclude Include="TestGameMode.h">
+    <ClInclude Include="TestLevelMode.h">
       <Filter>Test</Filter>
     </ClInclude>
-    <ClInclude Include="polygon.h">
+    <ClInclude Include="TestActor.h">
       <Filter>Test</Filter>
     </ClInclude>
   </ItemGroup>
@@ -71,10 +71,10 @@
     <ClCompile Include="TitleHUD.cpp">
       <Filter>HUD</Filter>
     </ClCompile>
-    <ClCompile Include="TestGameMode.cpp">
+    <ClCompile Include="TestLevelMode.cpp">
       <Filter>Test</Filter>
     </ClCompile>
-    <ClCompile Include="polygon.cpp">
+    <ClCompile Include="TestActor.cpp">
       <Filter>Test</Filter>
     </ClCompile>
   </ItemGroup>

@@ -7,9 +7,9 @@
 #include <EngineCore/TimeEventComponent.h>
 #include <EngineCore/Collision.h>
 #include "MyCustomRenderer.h"
-#include "polygon.h"
+#include "TestActor.h"
 
-Apolygon::Apolygon()
+TestActor::TestActor()
 {
 
 	std::shared_ptr<UDefaultSceneComponent> Default = CreateDefaultSubObject<UDefaultSceneComponent>();
@@ -21,19 +21,16 @@ Apolygon::Apolygon()
 
 }
 
-Apolygon::~Apolygon()
+TestActor::~TestActor()
 {
 }
 
-void Apolygon::BeginPlay()
+void TestActor::BeginPlay()
 {
 	AActor::BeginPlay();
-	Renderer->SetRotation({ 0.0f,45.0f,0.0f });
-
-
 }
 
-void Apolygon::Tick(float _DeltaTime)
+void TestActor::Tick(float _DeltaTime)
 {
 	AActor::Tick(_DeltaTime);
 

@@ -1,7 +1,7 @@
 #include "PreCompile.h"
 
-#include "TestGameMode.h"
-#include "polygon.h"
+#include "TestLevelMode.h"
+#include "TestActor.h"
 #include <EngineCore/CameraActor.h>
 #include <EngineCore/DefaultSceneComponent.h>
 #include <EngineCore/SpriteRenderer.h>
@@ -13,9 +13,9 @@
 #include "ContentsEditorGUI.h"
 #include <EnginePlatform/EngineInput.h>
 
-ATestGameMode::ATestGameMode()
+TestLevelMode::TestLevelMode()
 {
-	Polygon = GetWorld()->SpawnActor<Apolygon>();
+	Object = GetWorld()->SpawnActor<TestActor>();
 
 	std::shared_ptr<ACameraActor> Camera = GetWorld()->GetMainCamera();
 	Camera->SetActorLocation({ 0.0f, 0.0f, -1000.0f });
@@ -24,11 +24,11 @@ ATestGameMode::ATestGameMode()
 
 }
 
-ATestGameMode::~ATestGameMode()
+TestLevelMode::~TestLevelMode()
 {
 }
 
-void ATestGameMode::Tick(float _DeltaTime)
+void TestLevelMode::Tick(float _DeltaTime)
 {
 	AGameMode::Tick(_DeltaTime);
 	if (UEngineInput::IsDown('P'))
@@ -37,5 +37,5 @@ void ATestGameMode::Tick(float _DeltaTime)
 
 	}
 
-	Polygon->AddActorRotation({ 0.0f, 0.0f ,-100.0f * _DeltaTime });
+	Object->AddActorRotation({ 0.0f, 0.0f ,-100.0f * _DeltaTime });
 }
