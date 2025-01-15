@@ -12,7 +12,7 @@
 #include <EngineCore/EngineGUIWindow.h>
 #include "TitleHUD.h"
 #include "ContentsEditorGUI.h"
-#include "TestGameMode.h"
+#include "TestLevelMode.h"
 
 
 // #define은 그냥 무조건 복붙
