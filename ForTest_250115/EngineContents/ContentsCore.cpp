@@ -12,7 +12,8 @@
 #include <EngineCore/EngineGUIWindow.h>
 #include "TitleHUD.h"
 #include "ContentsEditorGUI.h"
-#include "TestLevel.h"
+#include "TestGameMode.h"
+
 
 // #define은 그냥 무조건 복붙
 CreateContentsCoreDefine(UContentsCore);
@@ -34,15 +35,22 @@ void UContentsCore::EngineStart(UEngineInitData& _Data)
 	_Data.WindowPos = { 100, 100 };
 	_Data.WindowSize = { 1280, 720 };
 
-	//MyGSetting();
+	MyGSetting();
 
 
 
 	// 주인공 APawn 상속 받으세요.
+	UEngineCore::CreateLevel<ATitleGameMode, APawn, ATitleHUD>("Titlelevel");
+	UEngineCore::CreateLevel<ATileMapGameMode, APawn, AHUD>("TileMapEditor");
+	UEngineCore::CreateLevel<ATestGameMode, APawn, AHUD>("TestLevel");
 
-	UEngineCore::CreateLevel<TestLevel, APawn, AHUD>("TestLevel");
 	UEngineCore::OpenLevel("TestLevel");
 
+	UEngineGUI::AllWindowOff();
+
+	UEngineGUI::CreateGUIWindow<UContentsEditorGUI>("ContentsEditorGUI");
+	std::shared_ptr<UContentsEditorGUI> Window = UEngineGUI::FindGUIWindow<UContentsEditorGUI>("ContentsEditorGUI");
+	Window->SetActive(true);
 }
 
 void UContentsCore::EngineTick(float _DeltaTime)

@@ -4,7 +4,7 @@
 MyCustomRenderer::MyCustomRenderer()
 {
 	CreateRenderUnit();
-	SetMesh("Rect");
+	SetMesh("Cube");
 	SetMaterial("MyMaterial");
 
 	MyColor.Albedo = float4(1.0f, 1.0f, 1.0f, 1.0f);

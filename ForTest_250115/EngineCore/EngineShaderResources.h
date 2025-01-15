@@ -4,7 +4,7 @@
 #include "EngineTexture.h"
 #include "EngineSampler.h"
 
-class UEngineShaderRes 
+class UEngineShaderRes
 {
 public:
 	std::string Name;

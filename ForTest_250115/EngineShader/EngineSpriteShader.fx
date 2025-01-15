@@ -110,15 +110,6 @@ cbuffer ResultColor : register(b0)
 float4 TileMap_PS(VertexShaderOutPut _Vertex) : SV_Target0
 {
 	
-	float4 Color = ImageTexture.Sample(ImageSampler, _Vertex.UV.xy);
-	
-	if (0.0f >= Color.a)
-	{
-		// 픽셀쉐이더에서 아웃풋 머저로 넘기지 않는다.
-		clip(-1);
-	}
-	
-	Color += PlusColor;
-	Color *= MulColor;
-	return Color;
+
+    return _Vertex.COLOR; 
 };

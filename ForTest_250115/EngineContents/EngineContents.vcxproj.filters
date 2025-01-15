@@ -32,11 +32,11 @@
     <ClInclude Include="TitleHUD.h">
       <Filter>HUD</Filter>
     </ClInclude>
-    <ClInclude Include="TestLevel.h">
-      <Filter>A TEST</Filter>
+    <ClInclude Include="TestGameMode.h">
+      <Filter>Test</Filter>
     </ClInclude>
-    <ClInclude Include="TestActor.h">
-      <Filter>A TEST</Filter>
+    <ClInclude Include="polygon.h">
+      <Filter>Test</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -71,11 +71,11 @@
     <ClCompile Include="TitleHUD.cpp">
       <Filter>HUD</Filter>
     </ClCompile>
-    <ClCompile Include="TestLevel.cpp">
-      <Filter>A TEST</Filter>
+    <ClCompile Include="TestGameMode.cpp">
+      <Filter>Test</Filter>
     </ClCompile>
-    <ClCompile Include="TestActor.cpp">
-      <Filter>A TEST</Filter>
+    <ClCompile Include="polygon.cpp">
+      <Filter>Test</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -94,8 +94,8 @@
     <Filter Include="HUD">
       <UniqueIdentifier>{2fc0cad0-7fd5-46fe-876b-90d7d52a5dc1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="A TEST">
-      <UniqueIdentifier>{10e68491-d38f-4fbb-b7ea-7d3bd5aea9e1}</UniqueIdentifier>
+    <Filter Include="Test">
+      <UniqueIdentifier>{0d25a1fe-822b-4381-812b-bca84949961c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

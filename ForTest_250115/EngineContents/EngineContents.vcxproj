@@ -175,6 +175,14 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="polygon.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="TestGameMode.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="ContentsCore.h">
       <SubType>
       </SubType>
@@ -187,14 +195,6 @@
     <ClInclude Include="Monster.h" />
     <ClInclude Include="Monster2.h" />
     <ClInclude Include="MyCustomRenderer.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="TestActor.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="TestLevel.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -222,6 +222,14 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="polygon.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="TestGameMode.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="ContentsCore.cpp">
       <SubType>
       </SubType>
@@ -234,14 +242,6 @@
     <ClCompile Include="Monster.cpp" />
     <ClCompile Include="Monster2.cpp" />
     <ClCompile Include="MyCustomRenderer.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="TestActor.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="TestLevel.cpp">
       <SubType>
       </SubType>
     </ClCompile>
