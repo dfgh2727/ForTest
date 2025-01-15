@@ -268,12 +268,12 @@ void UEngineGraphicDevice::MaterialInit()
 	//	Mat->SetPixelShader("EngineTileMapShader.fx");
 	//}
 
-	/*{
+	{
 		std::shared_ptr<UEngineMaterial> Mat = UEngineMaterial::Create("TargetMerge");
 		Mat->SetVertexShader("EngineTargetMergeShader.fx");
 		Mat->SetPixelShader("EngineTargetMergeShader.fx");
 		Mat->SetDepthStencilState("TargetMerge");
-	}*/
+	}
 
 
 

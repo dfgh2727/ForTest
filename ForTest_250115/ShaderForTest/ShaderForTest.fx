@@ -66,7 +66,7 @@ cbuffer FUVValue : register(b2)
 };
 
 // 버텍스쉐이더를 다 만들었다.
-VertexShaderOutPut VertexToWorld_VS(EngineVertex _Vertex)
+VertexShaderOutPut TileMap_VS(EngineVertex _Vertex)
 {
 	// CPU에서 계산한 값을 쉐이더에게 넘기는 방법을 알아야 하는데
 	// 상수버퍼라고 부릅니다.
@@ -107,10 +107,17 @@ cbuffer ResultColor : register(b0)
 };
 
 // 이미지를 샘플링해서 이미지를 보이게 만들고
-float4 PixelToWorld_PS(VertexShaderOutPut _Vertex) : SV_Target0
+float4 TileMap_PS(VertexShaderOutPut _Vertex) : SV_Target0
 {
 	
     float4 Color = ImageTexture.Sample(ImageSampler, _Vertex.UV.xy);
+	
+    if (0.0f >= Color.a)
+    {
+		// 픽셀쉐이더에서 아웃풋 머저로 넘기지 않는다.
+        clip(-1);
+    }
+	
     Color += PlusColor;
     Color *= MulColor;
     return Color;
